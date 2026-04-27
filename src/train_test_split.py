@@ -14,9 +14,9 @@ def time_split(
     - Target = 'Sales Count'
     """
 
-    # ===============================
-    # VALIDATIONS
-    # ===============================
+
+    # VALIDATIONS --------------------------------------------------------------
+
     if not isinstance(df.index, pd.DatetimeIndex):
         raise ValueError("DataFrame must have a DatetimeIndex")
 
@@ -29,17 +29,16 @@ def time_split(
     # Ensure sorted
     df = df.sort_index()
 
-    # ===============================
-    # SPLIT
-    # ===============================
+    # SPLIT ------------------------------------------------------------------------------
+ 
     split_idx = int(len(df) * train_ratio)
 
     train_df = df.iloc[:split_idx]
     test_df = df.iloc[split_idx:]
 
-    # ===============================
-    # FEATURES & TARGET
-    # ===============================
+    
+    # FEATURES & TARGET -------------------------------------------------------------------------
+   
     target_col = "Sales Count"
     feature_cols = [col for col in df.columns if col != target_col]
 
@@ -49,9 +48,9 @@ def time_split(
     X_test = test_df[feature_cols].copy()
     y_test = test_df[target_col].copy()
 
-    # ===============================
-    # LOGGING
-    # ===============================
+ 
+    # LOGGING --------------------------------------------------------------------------------------
+
     print("✅ Time split complete")
     print(f"Train: {len(X_train)} rows | Test: {len(X_test)} rows")
     print(f"Train range: {X_train.index.min()} → {X_train.index.max()}")
