@@ -448,7 +448,4 @@ st.caption("Toronto Island Ferry Demand Forecasting System • Production Ready"
 
 st.markdown("---")
 
-st.markdown(
-    "<center style='color:#888;'>Built by AI/ML Forecasting Developer • GitHub • LinkedIn</center>",
-    unsafe_allow_html=True
-)
+st.caption("Built by AI/ML Forecasting Developer • [LinkedIn](https://www.linkedin.com/in/nikhilsingh-k/) • [GitHub](https://github.com/nikhilsingh-k)")
