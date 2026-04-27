@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 
 
-# ======================================================
-# PREDICTION INTERVALS
-# ======================================================
+
+# PREDICTION INTERVALS --------------------------------------------------------------------
+
 def calculate_prediction_intervals(
     y_pred: pd.Series,
     residuals: pd.Series,
@@ -19,35 +19,31 @@ def calculate_prediction_intervals(
     95% interval → z = 1.96
     """
 
-    # ===============================
-    # VALIDATION
-    # ===============================
+    # VALIDATION --------------------------------------------------------------
+    
     if len(residuals) == 0:
         raise ValueError("Residuals cannot be empty")
 
-    # Align residuals (safety)
+    # Aligned residuals (safety)
     residuals = residuals.dropna()
 
-    # ===============================
+
     # Z-SCORE (FIXED)
-    # ===============================
     if confidence_level == 0.95:
         z = 1.96
     else:
         # TODO: Generalize for other confidence levels if needed
         z = 1.96
 
-    # ===============================
-    # STANDARD DEVIATION
-    # ===============================
+    # STANDARD DEVIATION --------------------------------------------------------------
+   
     std_residuals = residuals.std(ddof=1)
 
     if np.isnan(std_residuals) or std_residuals == 0:
         std_residuals = 1e-6
 
-    # ===============================
-    # INTERVALS
-    # ===============================
+    # INTERVALS --------------------------------------------------------------------
+    
     lower_bound = y_pred - z * std_residuals
     upper_bound = y_pred + z * std_residuals
 
@@ -63,9 +59,8 @@ def calculate_prediction_intervals(
     return intervals_df
 
 
-# ======================================================
-# TRAIN RESIDUALS
-# ======================================================
+# TRAIN RESIDUALS -----------------------------------------------------------------------
+
 def get_train_residuals(
     y_true: pd.Series,
     y_pred: pd.Series
