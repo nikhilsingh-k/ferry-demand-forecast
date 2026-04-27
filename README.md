@@ -257,8 +257,11 @@ The dashboard bridges predictive analytics with operational decision-making.
 # Author
 
 Nikhil Kumar Singh
+
 BCA (Artificial Intelligence & Machine Learning)
+
 AI & Data Analytics Enthusiast
 
 GitHub: [https://github.com/nikhilsingh-k](https://github.com/nikhilsingh-k)
+
 LinkedIn: [https://www.linkedin.com/in/nikhilsingh-k/](https://www.linkedin.com/in/nikhilsingh-k/)
