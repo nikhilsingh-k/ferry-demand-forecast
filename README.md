@@ -1,21 +1,19 @@
-# Ferry Demand Forecasting & Passenger Flow Intelligence Dashboard
+# ⛴️ Ferry Demand Forecasting & Passenger Flow Intelligence Dashboard
 
-[Live Application](https://your-streamlit-link.streamlit.app/)
-[GitHub Repository](https://github.com/yourusername/ferry-demand-forecasting-dashboard)
-
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)
+[![Live App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ferry-demand-forecast.streamlit.app)
+[![GitHub](https://img.shields.io/badge/GitHub-nikhilsingh--k-black?logo=github)](https://github.com/nikhilsingh-k/ferry-demand-forecast)
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![Machine Learning](https://img.shields.io/badge/Forecasting-TimeSeries-green)
 ![Plotly](https://img.shields.io/badge/Visualization-Interactive-purple)
 ![Deployment](https://img.shields.io/badge/Deployment-Live-success)
 
 ---
 
-# Overview
+## Overview
 
 This project presents an intelligent ferry demand forecasting system designed to predict short-term passenger traffic for the Toronto Island Ferry transportation network.
 
-The dashboard integrates machine learning, rolling validation, uncertainty modeling, and multi-horizon forecasting to estimate future passenger demand patterns.
+The dashboard integrates **8 machine learning and statistical models**, rolling validation, uncertainty modeling, SHAP explainability, and multi-horizon forecasting to estimate future passenger demand patterns at 15-minute intervals.
 
 Rather than only visualizing historical ticket volume, the system provides predictive intelligence that helps optimize ferry operations, staffing, scheduling, and passenger flow management.
 
@@ -23,42 +21,42 @@ The framework combines forecasting analytics with KPI diagnostics to support tra
 
 ---
 
-# Business Context
+## Business Context
 
 Public transportation systems often experience fluctuating passenger demand driven by:
 
-* Seasonal tourism patterns
-* Weekend vs weekday traffic
-* Weather-related travel behavior
-* Holiday-driven demand spikes
-* Peak-hour congestion variability
-* Operational uncertainty during high-volume periods
+- Seasonal tourism patterns
+- Weekend vs weekday traffic
+- Weather-related travel behavior
+- Holiday-driven demand spikes
+- Peak-hour congestion variability
+- Operational uncertainty during high-volume periods
 
 Without predictive demand visibility, ferry operators may face:
 
-* Understaffing during peak demand
-* Resource over-allocation during low demand
-* Longer wait times
-* Passenger congestion
-* Reduced scheduling efficiency
+- Understaffing during peak demand
+- Resource over-allocation during low demand
+- Longer passenger wait times
+- Reduced scheduling efficiency
+- Missed high-congestion periods
 
-This forecasting dashboard provides structured demand intelligence to reduce uncertainty.
+This forecasting dashboard provides structured demand intelligence to reduce operational uncertainty.
 
 ---
 
-# Live Dashboard
+## Live Dashboard
 
 Access the deployed application:
 
-```text
-https://your-streamlit-link.streamlit.app/
+```
+https://ferry-demand-forecast.streamlit.app
 ```
 
-The dashboard enables interactive forecasting, KPI monitoring, and demand analysis across multiple time horizons.
+The dashboard enables interactive forecasting, KPI monitoring, SHAP explainability, and demand analysis across multiple time horizons.
 
 ---
 
-# Dashboard Preview
+## Dashboard Preview
 
 Add screenshots inside the `assets/` folder and reference them here.
 
@@ -66,139 +64,143 @@ Add screenshots inside the `assets/` folder and reference them here.
 ![Dashboard Overview](assets/dashboard_overview.png)
 ![Forecast View](assets/forecast_chart.png)
 ![Model Comparison](assets/model_comparison.png)
+![SHAP Explainability](assets/shap_features.png)
 ```
 
 ---
 
-# Key Features
+## Key Features
 
-## Interactive Forecasting Dashboard
+### Interactive Forecasting Dashboard
+- Dynamic model selection across 8 algorithms
+- 15-minute interval passenger demand forecasting
+- Rolling forecast validation (walk-forward CV)
+- Multi-horizon prediction: 15 min → 2 hours
+- Interactive Plotly visualizations with unified hover
+- CSV export of any forecast with timestamps
 
-* Dynamic model selection
-* Time-series passenger forecasting
-* Rolling forecast validation
-* Multi-horizon prediction support
-* Interactive visualization with Plotly
+### KPI Monitoring
 
-## KPI Monitoring
+| KPI | Definition |
+|---|---|
+| **Forecast Accuracy** | `100 - MAPE` with robust epsilon to handle zero-demand periods |
+| **Peak Miss Rate** | % of high-demand periods the model failed to anticipate |
+| **Error Drift** | MAE(second half) − MAE(first half) — positive means degrading over time |
+| **Conf. Band Width** | Average width of the 95% prediction interval |
+| **Lead Time** | Minutes ahead a predicted peak fires before the actual peak |
 
-* Forecast Accuracy
-* Peak Miss Rate
-* Error Drift
-* Confidence Band Width
-* Forecast Lead Time
+### Machine Learning Model Comparison
 
-## Machine Learning Model Comparison
+The dashboard evaluates 8 forecasting approaches side by side:
 
-The dashboard evaluates multiple forecasting approaches:
+| Model | Type |
+|---|---|
+| Naive | Baseline |
+| Moving Average | Baseline |
+| Linear Regression | ML |
+| Random Forest | ML |
+| Gradient Boosting | ML |
+| XGBoost | ML |
+| ARIMA | Statistical |
+| Prophet | Statistical |
 
-* Random Forest
-* Gradient Boosting
-* XGBoost
-* Prophet Forecasting
-* Time-Series Baselines
+### SHAP Explainability
+- Feature importance for Random Forest, Gradient Boosting, XGBoost
+- TreeExplainer-based SHAP values
+- Top 15 feature bar chart with color-coded impact scores
 
-## Uncertainty Modeling
+### Uncertainty Modeling
+- Residual-based 95% confidence interval estimation
+- Prediction bands clipped to physical minimum (no negative demand)
+- Forecast reliability monitoring per model
 
-* Confidence interval estimation
-* Forecast band generation
-* Prediction reliability monitoring
-
-## Multi-Horizon Forecasting
-
-Supports forecasting across multiple future windows.
-
-Examples:
-
-* Next hour demand
-* Same-day traffic prediction
-* Short-term operational planning
+### Multi-Horizon Forecasting
+- 15-minute operational window
+- 30-minute short-term planning
+- 1-hour scheduling support
+- 2-hour capacity planning
 
 ---
 
-# Forecasting Intelligence
+## Forecasting Intelligence
 
 This project focuses on operational forecasting intelligence rather than simple historical visualization.
 
 The system identifies:
-
-* Passenger demand spikes
-* High-risk congestion periods
-* Forecast reliability
-* Error behavior over time
-* Model stability across horizons
-
----
-
-# Analytical Insights
-
-* Passenger demand follows strong seasonal and temporal patterns
-* Peak ferry usage clusters around weekends and tourism periods
-* Forecasting accuracy improves when engineered features are incorporated
-* Demand uncertainty increases during irregular traffic periods
-* Rolling validation improves reliability compared to static train-test evaluation
+- Passenger demand spikes using robust IQR-based thresholds
+- High-risk congestion periods before they occur
+- Forecast reliability via confidence band width
+- Error behavior drift over time
+- Model stability across multiple forecast horizons
 
 ---
 
-# Strategic Use Cases
+## Analytical Insights
 
-* Ferry scheduling optimization
-* Staff allocation planning
-* Passenger congestion management
-* Tourism demand forecasting
-* Resource utilization planning
-* Transportation operations intelligence
-
----
-
-# Technology Stack
-
-* Python
-* Streamlit
-* Pandas
-* NumPy
-* Plotly
-* Scikit-learn
-* XGBoost
-* Prophet
-* Time Series Forecasting
-* Machine Learning
+- Passenger demand follows strong seasonal and temporal patterns
+- Peak ferry usage clusters around weekends and summer tourism periods
+- Forecasting accuracy improves significantly with engineered lag and rolling features
+- Demand uncertainty increases during irregular high-traffic periods
+- Rolling validation produces more reliable estimates than static train/test splits
+- Extreme outlier spikes (up to 5,342 passengers per slot) require robust peak detection
 
 ---
 
-# Project Structure
+## Strategic Use Cases
 
-```text
-project-root/
+- Ferry scheduling optimization
+- Staff allocation planning
+- Passenger congestion management
+- Tourism demand forecasting
+- Resource utilization planning
+- Transportation operations intelligence
+
+---
+
+## Technology Stack
+
+`Python` · `Streamlit` · `Pandas` · `NumPy` · `Plotly` · `Scikit-learn` · `XGBoost` · `Prophet` · `ARIMA` · `SHAP` · `StatsModels`
+
+---
+
+## Project Structure
+
+```
+ferry-demand-forecast/
 │
-├── app/
-│   └── app.py
-│
-├── data/
-│   └── Toronto Island Ferry Tickets.csv
+├── app.py                    ← Streamlit entry point
+├── requirements.txt
+├── README.md
 │
 ├── src/
-│   ├── baseline_models.py
-│   ├── data_loader.py
-│   ├── evaluation.py
-│   ├── features.py
-│   ├── horizon_metrics.py
-│   ├── kpis.py
-│   ├── multi_horizon.py
-│   ├── prophet_model.py
-│   ├── rolling_validation.py
-│   ├── time_series_models.py
-│   ├── train_test_split.py
-│   ├── uncertainty.py
-│   └── validation.py
+│   ├── data_loader.py        ← Load & resample raw CSV
+│   ├── features.py           ← Time/lag/rolling feature engineering
+│   ├── train_test_split.py   ← Temporal train/test split
+│   ├── baseline_models.py    ← Naive, MA, LR, RF, GB, XGBoost
+│   ├── time_series_models.py ← ARIMA
+│   ├── prophet_model.py      ← Facebook Prophet
+│   ├── evaluation.py         ← MAE, RMSE, MAPE metrics
+│   ├── kpis.py               ← 5 operational KPI calculations
+│   ├── uncertainty.py        ← Prediction interval estimation
+│   ├── horizon_metrics.py    ← Per-horizon performance breakdown
+│   ├── multi_horizon.py      ← Multi-step forecasting logic
+│   ├── rolling_validation.py ← Walk-forward cross-validation
+│   └── validation.py         ← Input data validation
 │
-├── README.md
-└── requirements.txt
+└── data/
+    └── Toronto Island Ferry Tickets.csv
 ```
 
 ---
 
-# Run Locally
+## Run Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/nikhilsingh-k/ferry-demand-forecast
+cd ferry-demand-forecast
+```
 
 Install dependencies:
 
@@ -209,59 +211,56 @@ pip install -r requirements.txt
 Run the application:
 
 ```bash
-streamlit run app/app.py
+streamlit run app.py
 ```
 
 Open in browser:
 
-```text
+```
 http://localhost:8501
 ```
 
 ---
 
-# Forecasting Workflow
+## Forecasting Workflow
 
-1. Load historical ferry ticket data
-2. Perform feature engineering
-3. Split time-series data chronologically
-4. Train forecasting models
+1. Load historical ferry ticket data (2015–2025, 15-min intervals)
+2. Engineer time, lag, and rolling window features
+3. Split time-series data chronologically (no data leakage)
+4. Train selected forecasting model(s)
 5. Validate through rolling forecasting windows
-6. Generate prediction intervals
-7. Compare models using KPI diagnostics
-8. Visualize forecasts inside interactive dashboard
+6. Generate residual-based 95% prediction intervals
+7. Compare models using 5 operational KPI diagnostics
+8. Visualize forecasts in interactive dashboard with SHAP explainability
 
 ---
 
-# Future Improvements
+## Future Improvements
 
-* Real-time ferry API integration
-* Weather feature integration
-* Passenger anomaly detection
-* Deep learning forecasting models
-* Live congestion prediction
-* Automated model retraining
+- Real-time ferry API integration
+- Weather feature integration (temperature, precipitation)
+- Passenger anomaly detection
+- Deep learning forecasting (LSTM, Temporal Fusion Transformer)
+- Live congestion prediction
+- Automated model retraining pipeline
 
 ---
 
-# Conclusion
+## Conclusion
 
 This project demonstrates how forecasting intelligence can improve transportation planning and passenger flow management.
 
-By combining machine learning, uncertainty modeling, rolling validation, and KPI diagnostics, the system creates a scalable framework for demand-aware ferry operations.
+By combining machine learning, uncertainty modeling, rolling validation, SHAP explainability, and KPI diagnostics, the system creates a scalable framework for demand-aware ferry operations.
 
-The dashboard bridges predictive analytics with operational decision-making.
+The dashboard bridges predictive analytics with operational decision-making in a fully deployable, interactive application.
 
 ---
 
-# Author
+## Author
 
-Nikhil Kumar Singh
-
-BCA (Artificial Intelligence & Machine Learning)
-
+**Nikhil Kumar Singh**
+BCA — Artificial Intelligence & Machine Learning
 AI & Data Analytics Enthusiast
 
-GitHub: [https://github.com/nikhilsingh-k](https://github.com/nikhilsingh-k)
-
-LinkedIn: [https://www.linkedin.com/in/nikhilsingh-k/](https://www.linkedin.com/in/nikhilsingh-k/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/nikhilsingh-k/)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?logo=github)](https://github.com/nikhilsingh-k)
