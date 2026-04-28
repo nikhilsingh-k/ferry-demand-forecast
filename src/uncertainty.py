@@ -44,7 +44,7 @@ def calculate_prediction_intervals(
 
     # INTERVALS --------------------------------------------------------------------
     
-    lower_bound = y_pred - z * std_residuals
+    lower_bound = (y_pred - z * std_residuals).clip(lower=0)
     upper_bound = y_pred + z * std_residuals
 
     intervals_df = pd.DataFrame({
