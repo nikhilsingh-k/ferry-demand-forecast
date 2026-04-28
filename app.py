@@ -314,55 +314,58 @@ def safe_format(val, fmt="{:.1f}", suffix=""):
 # Enhanced KPI Cards
 c1, c2, c3, c4, c5 = st.columns(5)
 
-with c1:
-    st.markdown(f"""
-    <div style="background:#1E2937; border-radius:16px; padding:20px 24px; text-align:center; border:1px solid rgba(148,163,184,0.15);">
-        <div style="color:#94A3B8; font-size:0.85rem;">Forecast Accuracy</div>
-        <div style="font-size:2.2rem; font-weight:700; color:#FACC15;">
-            {kpis.get('Forecast_Accuracy', 0):.1f}%
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+kpi_data = [
+    {
+        "label": "Forecast Accuracy",
+        "value": f"{kpis.get('Forecast_Accuracy', 0):.1f}%",
+        "color": "#FACC15"
+    },
+    {
+        "label": "Peak Miss Rate",
+        "value": f"{kpis.get('Peak_Miss_Rate', 0):.1f}%",
+        "color": "#F87171"
+    },
+    {
+        "label": "Error Drift",
+        "value": f"{kpis.get('Error_Drift', 0):+.3f}",
+        "color": "#E2E8F0"
+    },
+    {
+        "label": "Conf. Band Width",
+        "value": f"{kpis.get('Confidence_Band_Width', 0):.1f}",
+        "color": "#60A5FA"
+    },
+    {
+        "label": "Lead Time",
+        "value": f"{kpis.get('Forecast_Lead_Time (mins)', 0):.0f} min",
+        "color": "#34D399"
+    },
+]
 
-with c2:
-    st.markdown(f"""
-    <div style="background:#1E2937; border-radius:16px; padding:20px 24px; text-align:center; border:1px solid rgba(148,163,184,0.15);">
-        <div style="color:#94A3B8; font-size:0.85rem;">Peak Miss Rate</div>
-        <div style="font-size:2.2rem; font-weight:700; color:#F87171;">
-            {kpis.get('Peak_Miss_Rate', 0):.1f}%
+cols = st.columns(5)
+for col, kpi in zip(cols, kpi_data):
+    with col:
+        st.markdown(f"""
+        <div style="
+            background:#1E2937;
+            border-radius:16px;
+            padding:20px 12px;
+            text-align:center;
+            border:1px solid rgba(148,163,184,0.15);
+            min-height:110px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+        ">
+            <div style="color:#94A3B8; font-size:0.78rem; margin-bottom:8px; white-space:nowrap;">
+                {kpi['label']}
+            </div>
+            <div style="font-size:1.9rem; font-weight:700; color:{kpi['color']}; white-space:nowrap; line-height:1.2;">
+                {kpi['value']}
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c3:
-    st.markdown(f"""
-    <div style="background:#1E2937; border-radius:16px; padding:20px 24px; text-align:center; border:1px solid rgba(148,163,184,0.15);">
-        <div style="color:#94A3B8; font-size:0.85rem;">Error Drift</div>
-        <div style="font-size:2.2rem; font-weight:700;">
-            {kpis.get('Error_Drift', 0):+.3f}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c4:
-    st.markdown(f"""
-    <div style="background:#1E2937; border-radius:16px; padding:20px 24px; text-align:center; border:1px solid rgba(148,163,184,0.15);">
-        <div style="color:#94A3B8; font-size:0.85rem;">Conf. Band Width</div>
-        <div style="font-size:2.2rem; font-weight:700; color:#60A5FA;">
-            {kpis.get('Confidence_Band_Width', 0):.1f}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c5:
-    st.markdown(f"""
-    <div style="background:#1E2937; border-radius:16px; padding:20px 24px; text-align:center; border:1px solid rgba(148,163,184,0.15);">
-        <div style="color:#94A3B8; font-size:0.85rem;">Lead Time</div>
-        <div style="font-size:2.2rem; font-weight:700; color:#34D399;">
-            {kpis.get('Forecast_Lead_Time (mins)', 0):.0f} min
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
