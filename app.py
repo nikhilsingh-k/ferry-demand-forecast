@@ -428,6 +428,24 @@ with tab1:
         fig.data[i].update(line=dict(width=2, color=colors[(i - 1) % len(colors)]))
 
     st.plotly_chart(fig, use_container_width=True)
+    # Download forecast as CSV
+    forecast_df = pd.DataFrame({
+        "Timestamp": y_test.index,
+        "Actual": y_test.values,
+        "Predicted": primary_pred.reindex(y_test.index).values,
+        "Upper_Bound": intervals["upper_bound"].reindex(y_test.index).values,
+        "Lower_Bound": intervals["lower_bound"].reindex(y_test.index).values,
+    })
+
+    csv = forecast_df.to_csv(index=False).encode("utf-8")
+
+    st.download_button(
+        label="📥 Download Forecast as CSV",
+        data=csv,
+        file_name=f"ferry_forecast_{selected_time.date()}.csv",
+        mime="text/csv",
+        use_container_width=True,
+    )
 
 with tab2:
     st.markdown('<div class="section-title">Model Comparison</div>', unsafe_allow_html=True)
