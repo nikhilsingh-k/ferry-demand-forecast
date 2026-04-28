@@ -58,7 +58,6 @@ The dashboard enables interactive forecasting, KPI monitoring, SHAP explainabili
 
 ## Dashboard Preview
 
-Add screenshots inside the `assets/` folder and reference them here.
 
 ```markdown
 ![Dashboard Overview](assets/dashboard_overview.png)
