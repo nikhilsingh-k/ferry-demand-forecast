@@ -368,9 +368,9 @@ for col, kpi in zip(cols, kpi_data):
         """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "📈 Forecast Overview", "🏆 Model Comparison", "⏳ Horizon Analysis",
-    "📉 Error Analysis", "🔥 Peak Analysis"
+    "📉 Error Analysis", "🔥 Peak Analysis", "🧠 Model Explainability"
 ])
 
 with tab1:
@@ -491,6 +491,86 @@ with tab5:
                                 mode="markers", name="Missed Peaks", marker=dict(color="#f87171", size=8, symbol="x")))
     fig_pk.update_layout(height=420, template="plotly_dark")
     st.plotly_chart(fig_pk, use_container_width=True)
+
+with tab6:
+    st.markdown("### 🧠 Feature Importance (SHAP)")
+
+    if primary_name in ["Random Forest", "Gradient Boosting", "XGBoost"]:
+        try:
+            import shap
+
+            with st.spinner("Computing SHAP values..."):
+                # Train the model to get the underlying estimator
+                from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+                import xgboost as xgb
+
+                MODEL_CLASS = {
+                    "Random Forest": RandomForestRegressor(n_estimators=100, random_state=42),
+                    "Gradient Boosting": GradientBoostingRegressor(random_state=42),
+                    "XGBoost": xgb.XGBRegressor(random_state=42, verbosity=0),
+                }
+
+                clf = MODEL_CLASS[primary_name]
+
+                # Use a sample for speed
+                sample_size = min(5000, len(X_train))
+                X_sample = X_train.iloc[-sample_size:]
+                y_sample = y_train.iloc[-sample_size:]
+
+                clf.fit(X_sample, y_sample)
+
+                # SHAP explainer
+                explainer = shap.TreeExplainer(clf)
+                X_explain = X_test.iloc[:min(200, len(X_test))]
+                shap_values = explainer.shap_values(X_explain)
+
+                # Mean absolute SHAP per feature
+                shap_df = pd.DataFrame({
+                    "Feature": X_explain.columns,
+                    "SHAP Importance": np.abs(shap_values).mean(axis=0)
+                }).sort_values("SHAP Importance", ascending=True).tail(15)
+
+                # Plot
+                fig_shap = go.Figure(go.Bar(
+                    x=shap_df["SHAP Importance"],
+                    y=shap_df["Feature"],
+                    orientation="h",
+                    marker=dict(
+                        color=shap_df["SHAP Importance"],
+                        colorscale="Viridis",
+                        showscale=True,
+                        colorbar=dict(title="SHAP Value")
+                    )
+                ))
+
+                fig_shap.update_layout(
+                    title=f"Top 15 Features — {primary_name}",
+                    xaxis_title="Mean |SHAP Value|",
+                    yaxis_title="Feature",
+                    paper_bgcolor="#0B1324",
+                    plot_bgcolor="#0B1324",
+                    font=dict(color="#94A3B8"),
+                    title_font=dict(color="#FACC15", size=16),
+                    height=500,
+                    margin=dict(l=20, r=20, t=50, b=20),
+                )
+
+                st.plotly_chart(fig_shap, use_container_width=True)
+
+                st.caption(
+                    "SHAP (SHapley Additive exPlanations) shows how much each feature "
+                    "contributes to the model's predictions on average."
+                )
+
+        except Exception as e:
+            st.error(f"SHAP computation failed: {str(e)}")
+
+    else:
+        st.info(
+            f"⚠️ SHAP explainability is only available for **Random Forest**, "
+            f"**Gradient Boosting**, and **XGBoost**. "
+            f"Currently selected: **{primary_name}**"
+        )
 
 st.caption("Toronto Island Ferry Demand Forecasting System • Production Ready")
 
