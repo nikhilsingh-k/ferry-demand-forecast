@@ -389,18 +389,45 @@ with tab1:
     fig.add_trace(go.Scatter(x=lb.index, y=lb, fill="tonexty", name="95% CI",
                              fillcolor="rgba(56,189,248,0.2)", line=dict(width=0)))
     fig.update_layout(
-    paper_bgcolor="#050A18",
-    plot_bgcolor="#0B1324",
-    font=dict(color="white"),
-    title_font=dict(size=20),
-    margin=dict(l=20, r=20, t=40, b=20),
-    height=500
+        paper_bgcolor="#0B1324",
+        plot_bgcolor="#0B1324",
+        font=dict(color="#94A3B8", family="Inter, sans-serif"),
+        title=dict(
+            text="Actual vs Predicted Demand",
+            font=dict(color="#FACC15", size=18, family="Inter, sans-serif"),
+            x=0.01
+        ),
+        legend=dict(
+            bgcolor="rgba(30,41,55,0.8)",
+            bordercolor="rgba(148,163,184,0.2)",
+            borderwidth=1,
+            font=dict(color="#E2E8F0")
+        ),
+        xaxis=dict(
+            gridcolor="rgba(148,163,184,0.08)",
+            linecolor="rgba(148,163,184,0.15)",
+            tickfont=dict(color="#64748B"),
+            showgrid=True,
+        ),
+        yaxis=dict(
+            gridcolor="rgba(148,163,184,0.08)",
+            linecolor="rgba(148,163,184,0.15)",
+            tickfont=dict(color="#64748B"),
+            showgrid=True,
+            zeroline=False,
+        ),
+        margin=dict(l=20, r=20, t=50, b=20),
+        height=500,
+        hovermode="x unified",
     )
-    st.markdown("<div style='background:#111827; padding:20px; border-radius:18px;'>", unsafe_allow_html=True)
+
+    # Improve trace styles
+    fig.data[0].update(line=dict(color="#E2E8F0", width=2), name="Actual")
+    colors = ["#38BDF8", "#FACC15", "#34D399", "#F87171", "#A78BFA"]
+    for i in range(1, len(fig.data) - 2):  # skip last 2 (CI band traces)
+        fig.data[i].update(line=dict(width=2, color=colors[(i - 1) % len(colors)]))
 
     st.plotly_chart(fig, use_container_width=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
 with tab2:
     st.markdown('<div class="section-title">Model Comparison</div>', unsafe_allow_html=True)
