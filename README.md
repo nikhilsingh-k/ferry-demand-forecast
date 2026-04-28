@@ -59,12 +59,12 @@ The dashboard enables interactive forecasting, KPI monitoring, SHAP explainabili
 ## Dashboard Preview
 
 
-```markdown
+
 ![Dashboard Overview](assets/dashboard_overview.png)
 ![Forecast View](assets/forecast_chart.png)
 ![Model Comparison](assets/model_comparison.png)
 ![SHAP Explainability](assets/shap_features.png)
-```
+
 
 ---
 
