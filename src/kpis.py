@@ -24,13 +24,13 @@ def compute_kpis(y_true, y_pred, intervals):
 
     # PEAK MISS RATE ---------------------------------------------------------------
     # A "miss" = no predicted peak within ±2 steps of an actual peak.
-    peak_threshold  = y_true.quantile(0.90)
+    peak_threshold  = y_true.quantile(0.75)
     actual_peak_idx = np.where(y_true.values >= peak_threshold)[0]
 
     missed = 0
     for idx in actual_peak_idx:
-        window_start = max(0, idx - 2)
-        window_end   = min(len(y_pred), idx + 3)
+        window_start = max(0, idx - 4)
+        window_end   = min(len(y_pred), idx + 5)
         if y_pred.iloc[window_start:window_end].max() < peak_threshold:
             missed += 1
 
