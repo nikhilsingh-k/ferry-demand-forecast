@@ -186,8 +186,15 @@ ferry-demand-forecast/
 │   ├── rolling_validation.py ← Walk-forward cross-validation
 │   └── validation.py         ← Input data validation
 │
-└── data/
-    └── Toronto Island Ferry Tickets.csv
+├── data/
+│   └── Toronto Island Ferry Tickets.csv
+│
+└── assets/
+    ├── dashboard_overview.png
+    ├── forecast_chart.png
+    ├── model_comparison.png
+    └── shap_features.png
+
 ```
 
 ---
