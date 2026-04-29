@@ -1,11 +1,24 @@
 # ⛴️ Ferry Demand Forecasting & Passenger Flow Intelligence Dashboard
 
 [![Live App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ferry-demand-forecast.streamlit.app)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19880739.svg)](https://doi.org/10.5281/zenodo.19880739)
 [![GitHub](https://img.shields.io/badge/GitHub-nikhilsingh--k-black?logo=github)](https://github.com/nikhilsingh-k/ferry-demand-forecast)
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![Machine Learning](https://img.shields.io/badge/Forecasting-TimeSeries-green)
 ![Plotly](https://img.shields.io/badge/Visualization-Interactive-purple)
 ![Deployment](https://img.shields.io/badge/Deployment-Live-success)
+![License](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey)
+
+---
+
+## 📄 Research Paper
+
+This project is backed by a peer-reviewed research publication on Zenodo:
+
+> **Singh, N. K. (2026).** *Ferry Demand Forecasting and Passenger Flow Intelligence for Multi-Horizon Transportation Planning.* Zenodo.
+> 👉 [https://doi.org/10.5281/zenodo.19880739](https://doi.org/10.5281/zenodo.19880739)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19880739.svg)](https://doi.org/10.5281/zenodo.19880739)
 
 ---
 
@@ -58,13 +71,14 @@ The dashboard enables interactive forecasting, KPI monitoring, SHAP explainabili
 
 ## Dashboard Preview
 
+Add screenshots inside the `assets/` folder and reference them here.
 
-
+```markdown
 ![Dashboard Overview](assets/dashboard_overview.png)
 ![Forecast View](assets/forecast_chart.png)
 ![Model Comparison](assets/model_comparison.png)
 ![SHAP Explainability](assets/shap_features.png)
-
+```
 
 ---
 
@@ -186,15 +200,8 @@ ferry-demand-forecast/
 │   ├── rolling_validation.py ← Walk-forward cross-validation
 │   └── validation.py         ← Input data validation
 │
-├── data/
-│   └── Toronto Island Ferry Tickets.csv
-│
-└── assets/
-    ├── dashboard_overview.png
-    ├── forecast_chart.png
-    ├── model_comparison.png
-    └── shap_features.png
-
+└── data/
+    └── Toronto Island Ferry Tickets.csv
 ```
 
 ---
@@ -252,13 +259,31 @@ http://localhost:8501
 
 ---
 
+## Citation
+
+If you use this work in your research or project, please cite:
+
+```bibtex
+@misc{singh2026ferry,
+  author       = {Singh, Nikhil Kumar},
+  title        = {Ferry Demand Forecasting and Passenger Flow Intelligence
+                  for Multi-Horizon Transportation Planning},
+  year         = {2026},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.19880739},
+  url          = {https://doi.org/10.5281/zenodo.19880739}
+}
+```
+
+---
+
 ## Conclusion
 
 This project demonstrates how forecasting intelligence can improve transportation planning and passenger flow management.
 
 By combining machine learning, uncertainty modeling, rolling validation, SHAP explainability, and KPI diagnostics, the system creates a scalable framework for demand-aware ferry operations.
 
-The dashboard bridges predictive analytics with operational decision-making in a fully deployable, interactive application.
+The dashboard bridges predictive analytics with operational decision-making in a fully deployable, interactive application — and is backed by published research on Zenodo.
 
 ---
 
@@ -270,3 +295,4 @@ AI & Data Analytics Enthusiast
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/nikhilsingh-k/)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?logo=github)](https://github.com/nikhilsingh-k)
+[![Research](https://img.shields.io/badge/Research-Zenodo-blue?logo=zenodo)](https://doi.org/10.5281/zenodo.19880739)
