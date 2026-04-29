@@ -71,14 +71,13 @@ The dashboard enables interactive forecasting, KPI monitoring, SHAP explainabili
 
 ## Dashboard Preview
 
-Add screenshots inside the `assets/` folder and reference them here.
 
-```markdown
+
 ![Dashboard Overview](assets/dashboard_overview.png)
 ![Forecast View](assets/forecast_chart.png)
 ![Model Comparison](assets/model_comparison.png)
 ![SHAP Explainability](assets/shap_features.png)
-```
+
 
 ---
 
@@ -200,8 +199,14 @@ ferry-demand-forecast/
 │   ├── rolling_validation.py ← Walk-forward cross-validation
 │   └── validation.py         ← Input data validation
 │
-└── data/
-    └── Toronto Island Ferry Tickets.csv
+├── data/
+│   └── Toronto Island Ferry Tickets.csv
+│
+└── assets/
+    ├── dashboard_overview.png
+    ├── forecast_chart.png
+    ├── model_comparison.png
+    └── shap_features.png
 ```
 
 ---
